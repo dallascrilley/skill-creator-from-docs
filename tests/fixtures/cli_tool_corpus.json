@@ -1,0 +1,18 @@
+{
+  "source": "tests/fixtures/sample_docs.md",
+  "pages": [
+    {
+      "url": "tests/fixtures/sample_docs.md",
+      "title": "Test Tool Documentation",
+      "content": "# Test Tool Documentation\n\nTest Tool is a command-line utility for testing purposes.\n\n## Installation\n\n```bash\npip install test-tool\n```\n\n## Quick Start\n\nBasic usage example:\n\n```bash\ntest-tool run --input data.txt --output results.txt\n```\n\n## Commands\n\n### run\n\nExecute the main processing:\n\n```bash\ntest-tool run [OPTIONS]\n```\n\n**Options:**\n- `--input FILE` - Input file path (required)\n- `--output FILE` - Output file path (default: stdout)\n- `--verbose` - Enable verbose logging\n- `--format FORMAT` - Output format: json, csv, text (default: text)\n\n**Example:**\n\n```bash\n# Process with JSON output\ntest-tool run --input data.txt --output results.json --format json\n```\n\n### validate\n\nValidate input file:\n\n```bash\ntest-tool validate FILE\n```\n\n**Example:**\n\n```bash\ntest-tool validate data.txt\n```\n\n## Common Workflows\n\n### 1. Basic Processing\n\n1. Prepare your input file\n2. Run the tool: `test-tool run --input data.txt`\n3. Check output in results\n\n### 2. Batch Processing\n\nFor multiple files:\n\n```bash\nfor file in *.txt; do\n  test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json\ndone\n```\n\n## Common Pitfalls\n\n### Missing Input File\n\n**Problem:** File not found error\n\n**Solution:** Ensure the input file path is correct and the file exists.\n\n```bash\n# Bad\ntest-tool run --input nonexistent.txt\n\n# Good\ntest-tool run --input $(pwd)/data.txt\n```\n\n### Invalid Format\n\n**Problem:** Output format not supported\n\n**Solution:** Use one of: json, csv, text\n\n### Permission Issues\n\n**Problem:** Cannot write to output file\n\n**Solution:** Check file permissions or use a different output location\n\n## Configuration\n\nCreate a config file at `~/.test-tool/config.yaml`:\n\n```yaml\ndefault_format: json\nverbose: false\noutput_dir: ./results\n```\n\n## API\n\nFor programmatic usage:\n\n```python\nfrom test_tool import TestTool\n\ntool = TestTool()\nresult = tool.run(input_file=\"data.txt\", format=\"json\")\nprint(result)\n```\n\n## Troubleshooting\n\n**Q: Tool runs slow**\nA: Use `--format text` for faster processing\n\n**Q: Output is empty**\nA: Check input file encoding (must be UTF-8)\n\n**Q: Command not found**\nA: Ensure test-tool is in your PATH after installation",
+      "metadata": {
+        "extraction_date": "2025-11-08T03:00:00"
+      }
+    }
+  ],
+  "metadata": {
+    "extraction_method": "markdown",
+    "total_files": 1,
+    "extraction_date": "2025-11-08T03:00:00"
+  }
+}

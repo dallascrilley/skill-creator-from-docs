@@ -1,0 +1,49 @@
+{
+  "layers": {
+    "inline_warnings": [
+      {
+        "location": "templates/cli_basic.sh:4",
+        "warning": "⚠️ PITFALL: Ensure input file exists before running",
+        "category": "file_handling"
+      },
+      {
+        "location": "templates/cli_batch.sh:4",
+        "warning": "⚠️ PITFALL: Ensure all files exist before batch processing",
+        "category": "file_handling"
+      }
+    ],
+    "validation_scripts": [
+      {
+        "name": "validate_prereqs.sh",
+        "checks": [
+          "test-tool command availability",
+          "Input file existence",
+          "Output directory permissions"
+        ]
+      }
+    ],
+    "checklists": [
+      {
+        "name": "pre-flight.md",
+        "items": [
+          "Input file exists and is readable",
+          "Output directory is writable",
+          "Format is valid (json/csv/text)",
+          "test-tool is installed and in PATH"
+        ]
+      }
+    ],
+    "setup_automation": [
+      {
+        "name": "setup.sh",
+        "steps": [
+          "Check test-tool installation",
+          "Create default config file",
+          "Set up output directories"
+        ]
+      }
+    ]
+  },
+  "pitfalls_covered": 3,
+  "generated_at": "2025-11-08T03:00:00"
+}

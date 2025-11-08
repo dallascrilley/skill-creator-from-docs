@@ -1,0 +1,117 @@
+{
+  "tool_type": "cli",
+  "workflows": [
+    {
+      "name": "Basic Processing",
+      "description": "Process a single input file",
+      "steps": [
+        "Prepare your input file",
+        "Run the tool: test-tool run --input data.txt",
+        "Check output in results"
+      ],
+      "complexity": "simple",
+      "use_case": "Single file processing"
+    },
+    {
+      "name": "Batch Processing",
+      "description": "Process multiple files at once",
+      "steps": [
+        "Navigate to directory with input files",
+        "Run batch command: for file in *.txt; do test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json; done",
+        "Verify all output files created"
+      ],
+      "complexity": "intermediate",
+      "use_case": "Multiple file processing"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Usage",
+      "code": "test-tool run --input data.txt --output results.txt",
+      "language": "bash",
+      "context": "Quick start example showing basic command usage"
+    },
+    {
+      "title": "JSON Output Format",
+      "code": "test-tool run --input data.txt --output results.json --format json",
+      "language": "bash",
+      "context": "Example of processing with JSON output format"
+    },
+    {
+      "title": "File Validation",
+      "code": "test-tool validate data.txt",
+      "language": "bash",
+      "context": "Validate input file before processing"
+    },
+    {
+      "title": "Batch Processing Loop",
+      "code": "for file in *.txt; do\n  test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json\ndone",
+      "language": "bash",
+      "context": "Process multiple files in a loop"
+    },
+    {
+      "title": "Python API Usage",
+      "code": "from test_tool import TestTool\n\ntool = TestTool()\nresult = tool.run(input_file=\"data.txt\", format=\"json\")\nprint(result)",
+      "language": "python",
+      "context": "Programmatic usage through Python API"
+    }
+  ],
+  "pitfalls": [
+    {
+      "category": "file_handling",
+      "description": "Missing Input File",
+      "trigger": "File not found error when input path is incorrect",
+      "impact": "high",
+      "solution": "Ensure the input file path is correct and the file exists",
+      "example_bad": "test-tool run --input nonexistent.txt",
+      "example_good": "test-tool run --input $(pwd)/data.txt"
+    },
+    {
+      "category": "validation",
+      "description": "Invalid Format",
+      "trigger": "Specifying unsupported output format",
+      "impact": "medium",
+      "solution": "Use one of the supported formats: json, csv, text",
+      "example_bad": "test-tool run --format xml",
+      "example_good": "test-tool run --format json"
+    },
+    {
+      "category": "permissions",
+      "description": "Permission Issues",
+      "trigger": "Cannot write to output file location",
+      "impact": "high",
+      "solution": "Check file permissions or use a different output location",
+      "example_bad": "test-tool run --output /root/results.txt",
+      "example_good": "test-tool run --output ./results.txt"
+    }
+  ],
+  "patterns": [
+    {
+      "name": "CLI Command Structure",
+      "type": "command_pattern",
+      "description": "Standard command-line interface pattern with subcommands and options",
+      "template": "test-tool COMMAND [OPTIONS]"
+    },
+    {
+      "name": "File I/O Pattern",
+      "type": "usage_pattern",
+      "description": "Input and output file specification pattern",
+      "template": "--input INPUT_FILE --output OUTPUT_FILE"
+    },
+    {
+      "name": "Format Selection",
+      "type": "configuration_pattern",
+      "description": "Output format selection pattern",
+      "template": "--format {json|csv|text}"
+    }
+  ],
+  "gaps": [],
+  "metadata": {
+    "tool_name": "test-tool",
+    "doc_source": "tests/fixtures/sample_docs.md",
+    "analysis_date": "2025-11-08T03:00:00",
+    "total_workflows": 2,
+    "total_examples": 5,
+    "total_pitfalls": 3
+  }
+}
