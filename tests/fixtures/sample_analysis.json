@@ -1,5 +1,11 @@
 {
   "tool_type": "cli",
+  "tool_type_confidence": 0.85,
+  "tool_type_reasoning": [
+    "Found command-line options and flags",
+    "Documentation describes CLI commands",
+    "Examples show shell usage"
+  ],
   "workflows": [
     {
       "name": "Basic Processing",
@@ -9,8 +15,7 @@
         "Run the tool: test-tool run --input data.txt",
         "Check output in results"
       ],
-      "complexity": "simple",
-      "use_case": "Single file processing"
+      "frequency": "common"
     },
     {
       "name": "Batch Processing",
@@ -20,69 +25,64 @@
         "Run batch command: for file in *.txt; do test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json; done",
         "Verify all output files created"
       ],
-      "complexity": "intermediate",
-      "use_case": "Multiple file processing"
+      "frequency": "occasional"
     }
   ],
   "examples": [
     {
       "title": "Basic Usage",
-      "code": "test-tool run --input data.txt --output results.txt",
       "language": "bash",
+      "code": "test-tool run --input data.txt --output results.txt",
+      "source_url": "tests/fixtures/sample_docs.md",
       "context": "Quick start example showing basic command usage"
     },
     {
       "title": "JSON Output Format",
-      "code": "test-tool run --input data.txt --output results.json --format json",
       "language": "bash",
+      "code": "test-tool run --input data.txt --output results.json --format json",
+      "source_url": "tests/fixtures/sample_docs.md",
       "context": "Example of processing with JSON output format"
     },
     {
       "title": "File Validation",
-      "code": "test-tool validate data.txt",
       "language": "bash",
+      "code": "test-tool validate data.txt",
+      "source_url": "tests/fixtures/sample_docs.md",
       "context": "Validate input file before processing"
     },
     {
       "title": "Batch Processing Loop",
-      "code": "for file in *.txt; do\n  test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json\ndone",
       "language": "bash",
+      "code": "for file in *.txt; do\n  test-tool run --input \"$file\" --output \"${file%.txt}.json\" --format json\ndone",
+      "source_url": "tests/fixtures/sample_docs.md",
       "context": "Process multiple files in a loop"
     },
     {
       "title": "Python API Usage",
-      "code": "from test_tool import TestTool\n\ntool = TestTool()\nresult = tool.run(input_file=\"data.txt\", format=\"json\")\nprint(result)",
       "language": "python",
+      "code": "from test_tool import TestTool\n\ntool = TestTool()\nresult = tool.run(input_file=\"data.txt\", format=\"json\")\nprint(result)",
+      "source_url": "tests/fixtures/sample_docs.md",
       "context": "Programmatic usage through Python API"
     }
   ],
   "pitfalls": [
     {
-      "category": "file_handling",
-      "description": "Missing Input File",
-      "trigger": "File not found error when input path is incorrect",
-      "impact": "high",
-      "solution": "Ensure the input file path is correct and the file exists",
-      "example_bad": "test-tool run --input nonexistent.txt",
-      "example_good": "test-tool run --input $(pwd)/data.txt"
+      "description": "File not found error when input path is incorrect",
+      "source_url": "tests/fixtures/sample_docs.md",
+      "severity": "high",
+      "context": "Missing Input File section"
     },
     {
-      "category": "validation",
-      "description": "Invalid Format",
-      "trigger": "Specifying unsupported output format",
-      "impact": "medium",
-      "solution": "Use one of the supported formats: json, csv, text",
-      "example_bad": "test-tool run --format xml",
-      "example_good": "test-tool run --format json"
+      "description": "Specifying unsupported output format",
+      "source_url": "tests/fixtures/sample_docs.md",
+      "severity": "medium",
+      "context": "Invalid Format section"
     },
     {
-      "category": "permissions",
-      "description": "Permission Issues",
-      "trigger": "Cannot write to output file location",
-      "impact": "high",
-      "solution": "Check file permissions or use a different output location",
-      "example_bad": "test-tool run --output /root/results.txt",
-      "example_good": "test-tool run --output ./results.txt"
+      "description": "Cannot write to output file location",
+      "source_url": "tests/fixtures/sample_docs.md",
+      "severity": "high",
+      "context": "Permission Issues section"
     }
   ],
   "patterns": [
