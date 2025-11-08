@@ -2,9 +2,36 @@
 
 ## 🎯 PURPOSE: TRANSFORMING DOCUMENTATION INTO PRODUCTION-READY SKILLS
 
-**This meta-skill enables Claude to systematically transform documentation for any tool, CLI, API, or library into comprehensive, production-ready PAI skills complete with helper scripts, templates, guardrails, and best practices.**
+**This is the Python automation system for creating skills from documentation. It provides a sequential, 6-phase pipeline for standalone execution without requiring Claude Code to be active.**
 
-This guide covers:
+## ⚡ EXECUTION MODEL: SEQUENTIAL AUTOMATION
+
+### This System (skill-creator-from-docs)
+**Sequential Python Pipeline**
+
+```bash
+python scripts/create_skill.py docs.md --skill-name tool
+```
+
+- **Architecture:** Sequential 6-phase pipeline
+- **Execution:** Phases run one after another (Phase 1 → 2 → 3 → 4 → 5 → 6)
+- **Parallelization:** None - reliable, predictable, deterministic
+- **Requirements:** Python 3.8+, no Claude API calls for core functionality
+- **Use when:** Want automation without active Claude Code session
+
+### For Agent-Powered Execution
+**Use the `doc-to-skill` skill in Claude Code instead**
+
+When you need parallel agent execution for 2-5x speedup:
+- Activate the `doc-to-skill` skill in Claude Code
+- It spawns parallel agents using Task tool
+- See `~/.claude/skills/doc-to-skill/SKILL.md` for details
+
+---
+
+## 📚 WHAT THIS GUIDE COVERS
+
+This comprehensive methodology document explains:
 - Documentation analysis methodology
 - Component brainstorming framework
 - Template-driven artifact generation
@@ -1996,9 +2023,11 @@ crwl "$URL" -o markdown > "/tmp/${TOOL_NAME}_docs.md"
 # (Claude processes with skill-creator-from-docs skill)
 ```
 
-### Agent Integration
+### Agent Integration in Generated Skills
 
-For complex tools, consider specialized agents:
+**Note:** This section is about including agent references in the skills you CREATE, not about using agents to create skills (this Python system is sequential).
+
+For complex tools, the generated skill can reference specialized agents:
 
 ```markdown
 ## Agent Configuration
@@ -2008,6 +2037,8 @@ For this skill, use:
 - **Training**: Focused on [tool] expertise
 - **Use for**: Complex [tool] workflows requiring deep knowledge
 ```
+
+**Example:** If creating a skill for a complex tool like Kubernetes, the generated skill can specify which PAI agents to use for Kubernetes-specific workflows.
 
 ---
 
